@@ -7,10 +7,11 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 
     <title>livewire</title>
-    @livewireStyles
+    <livewire:styles />
 </head>
 <body>
-    @livewire('comment')
-    @livewireScripts
+    <livewire:comment :comments="$comments"/>
+                    {{-- ^props=^value --}}                                 
+    <livewire:scripts />
 </body>
 </html>

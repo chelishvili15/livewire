@@ -18,13 +18,15 @@
                 </button>
             </div>
         </form>
+        {{-- {{ dd($comment) }} --}}
         @foreach($comment as $item)
         <div class="rounded border shadow p-3 my-2">
             <div class="flex justify-start my-2">
-                <p class="font-bold text-lg"> {{ $item['author'] }}</p>
-                <p class="mx-3 py-1 text-xs text-gray-500 font-semibold">{{ $item['created_at'] }}</p>
+                <p class="font-bold text-lg"> {{ $item->creator->name }}</p> 
+                {{--  --}}
+                <p class="mx-3 py-1 text-xs text-gray-500 font-semibold">{{ $item->created_at->diffForHumans() }}</p>
             </div>
-            <p class="text-gray-800">{{ $item['body'] }} </p>
+            <p class="text-gray-800">{{ $item->body }} </p>
         </div>
         @endforeach
     </div>
