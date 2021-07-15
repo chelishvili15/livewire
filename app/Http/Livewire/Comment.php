@@ -8,17 +8,8 @@ use App\Models\Comments;
 
 class Comment extends Component
 {
-    public $comment = [
-        [
-            'body' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, magnam.',
-            'created_at' => '1min ago',
-            'author' => 'chelo'
-            ]
-    ];
-
     public $newComment;
-
-    
+    public $comment;
 
     public function mount()
     {
@@ -35,11 +26,14 @@ class Comment extends Component
             return;
         }
 
-        array_unshift($this->comment, [
-                'body' => $this->newComment,
-                'created_at' => Carbon::now()->diffForHumans(),
-                'author' => 'chelo'
+        /* add ბათონზე დაჭერისას შეიქმება ახალი მასივი რომლი ბადი იქნება ინფუტ ელემენტში */
+        $createComment = Comments::create([
+            'body' => $this->newComment,
+            'user_id' => 1,
         ]);
+
+        /* და ეს შექმნილი მასივი დავფუშოთ commentში რომელიც გადაეცემა დომს mount მეთოდით */
+        $this->comment->prepend($createComment);
 
         $this->newComment = ''; //ინპუტს გახდის ცარიელის კომენტარის დამატების შემდეგ
     }
