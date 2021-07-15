@@ -10,8 +10,7 @@
     <livewire:styles />
 </head>
 <body>
-    <livewire:comment :comments="$comments"/>
-                    {{-- ^props=^value --}}                                 
+    <livewire:comment />                                
     <livewire:scripts />
 </body>
 </html>
