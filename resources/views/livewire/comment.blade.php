@@ -2,13 +2,18 @@
     <div class="w-6/12">
         <h1 class="my-10 text-3xl">Comments</h1>
         <form class="my-4 flex" wire:submit.prevent='addComment'>
-            <input 
-                type="text" 
-                class="w-full rounded border shadow p-2 mr-2 my-2" 
-                placeholder="What's in your mind." 
-                wire:model.lazy="newComment"
-            >
-            
+            <div class="flex flex-col w-full space-x-4">
+                <input 
+                    type="text" 
+                    class="w-full rounded border shadow p-2 mr-2 my-2 " 
+                    placeholder="What's in your mind." 
+                    wire:model="newComment"
+                    required
+                >
+                @error('newComment')
+                    <p class="text-red-600 text-xs inline-block">{{ $message }}</p>
+                @enderror
+            </div>
             <div class="py-2">
                 <button 
                     type="submit" 

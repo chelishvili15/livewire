@@ -19,12 +19,22 @@ class Comment extends Component
         $this->comment = $comments;
     }
 
+    public function updated($field)
+    {
+        $this->validateOnly($field, [
+            'newComment' => 'required|min:2|max:255'
+        ]);
+    }
+
     public function addComment()
     {
         
-        if ($this->newComment === null){
-            return;
-        }
+        /* ვალიდაცია */
+        $this->validate([
+            'newComment' => 'required|min:2'
+        ]);
+
+
 
         /* add ბათონზე დაჭერისას შეიქმება ახალი მასივი რომლი ბადი იქნება ინფუტ ელემენტში */
         $createComment = Comments::create([
