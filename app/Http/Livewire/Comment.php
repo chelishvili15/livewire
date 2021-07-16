@@ -19,6 +19,10 @@ class Comment extends Component
         $this->comment = $comments;
     }
 
+    /** livewire validation 
+     *
+     * @return realtimevalidation
+     */
     public function updated($field)
     {
         $this->validateOnly($field, [
@@ -26,16 +30,15 @@ class Comment extends Component
         ]);
     }
 
+    public function remove($commentId)
+    {
+        $com = Comments::find($commentId);
+        $com -> delete();
+        $this->comment = $this->comment->where('id', '!==', $commentId);
+    }
+
     public function addComment()
     {
-        
-        /* ვალიდაცია */
-        $this->validate([
-            'newComment' => 'required|min:2'
-        ]);
-
-
-
         /* add ბათონზე დაჭერისას შეიქმება ახალი მასივი რომლი ბადი იქნება ინფუტ ელემენტში */
         $createComment = Comments::create([
             'body' => $this->newComment,
